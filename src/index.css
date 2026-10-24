@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FFFAF5;
+  --color-cream: #F8EDE0;
+
+  --color-blush-50: #FFF5F8;
+  --color-blush-100: #FDE9EF;
+  --color-blush-200: #FAD5E1;
+  --color-blush-300: #F5B9CD;
+  --color-blush-400: #EE94B1;
+
+  --color-rose-500: #E0568A;
+  --color-rose-600: #CC3F75;
+  --color-rose-700: #A8305F;
+
+  --color-plum-500: #84698A;
+  --color-plum-700: #5B3B62;
+  --color-plum-900: #3A1B40;
+  --color-plum-950: #2B1230;
+
+  --color-leaf-300: #BFD0B2;
+  --color-leaf-500: #8FA67E;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-script: "Dancing Script", cursive;
+  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --radius-input: 14px;
+  --radius-card: 20px;
+  --radius-tile: 24px;
+  --radius-polaroid: 14px;
+  --radius-pill: 9999px;
+
+  --shadow-soft: 0 8px 24px -8px rgb(168 48 95 / 0.18);
+  --shadow-lift: 0 18px 40px -12px rgb(168 48 95 / 0.28);
+  --shadow-tile: 0 10px 30px -10px rgb(43 18 48 / 0.25);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-plum-700);
+    background-color: var(--color-ivory);
+  }
+
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Focus ring style required by specs: 2px rose-600 with 2px offset */
+  :focus-visible {
+    outline: 2px solid var(--color-rose-600);
+    outline-offset: 2px;
+  }
+}
+
+/* Background soft glows fixed behind content */
+.bg-glow-decor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-glow-decor::before {
+  content: "";
+  position: absolute;
+  top: -10vw;
+  right: -10vw;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253, 233, 239, 0.75) 0%, rgba(255, 250, 245, 0) 70%);
+}
+
+.bg-glow-decor::after {
+  content: "";
+  position: absolute;
+  top: 45vh;
+  left: -15vw;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(250, 213, 225, 0.55) 0%, rgba(255, 250, 245, 0) 70%);
+}
+
+/* Float animation for decorative hearts */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(3deg);
+  }
+}
+
+.animate-gentle-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Shimmer animation for image skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #FFF5F8 25%, #FDE9EF 50%, #FFF5F8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite ease-in-out;
+}
+
+/* Card hover lift */
+.hover-lift {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Button hover lift */
+.btn-lift {
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+}
+.btn-lift:hover {
+  transform: translateY(-2px);
+}
+.btn-lift:active {
+  transform: translateY(0);
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-gentle-float {
+    animation: none !important;
+  }
+  .hover-lift:hover,
+  .btn-lift:hover {
+    transform: none !important;
+  }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
