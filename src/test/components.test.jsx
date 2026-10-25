@@ -189,6 +189,64 @@ describe("ProductCard component", () => {
     fireEvent.click(heartBtn);
     expect(heartBtn).toHaveAttribute("aria-pressed", "false");
   });
+
+  it("does not render Sample badge or placeholder badge when isPlaceholder is false", () => {
+    const liveProduct = {
+      ...mockSampleProduct,
+      isPlaceholder: false,
+      image: {
+        src: "/images/products/pink-tulip-bouquet.jpg",
+        alt: "Pink Tulip Bouquet",
+        objectPosition: "center 30%",
+      },
+    };
+
+    render(
+      <BrowserRouter>
+        <ProductCard product={liveProduct} />
+      </BrowserRouter>
+    );
+
+    expect(screen.queryByText(/^Sample$/i)).toBeNull();
+    expect(screen.queryByText(/Placeholder photo/i)).toBeNull();
+  });
+
+  it("applies objectPosition to the image element style", () => {
+    const liveProduct = {
+      ...mockSampleProduct,
+      isPlaceholder: false,
+      image: {
+        src: "/images/products/pink-tulip-bouquet.jpg",
+        alt: "Pink Tulip Bouquet",
+        objectPosition: "center 30%",
+      },
+    };
+
+    render(
+      <BrowserRouter>
+        <ProductCard product={liveProduct} />
+      </BrowserRouter>
+    );
+
+    const img = screen.getByRole("img", { name: /Pink Tulip Bouquet/i });
+    expect(img).toHaveStyle({ objectPosition: "center 30%" });
+  });
+
+  it("renders formatted price when a numeric price is supplied", () => {
+    const pricedProduct = {
+      ...mockSampleProduct,
+      price: 199,
+    };
+
+    render(
+      <BrowserRouter>
+        <ProductCard product={pricedProduct} />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/199/)).toBeInTheDocument();
+    expect(screen.queryByText(/Message for price/i)).toBeNull();
+  });
 });
 
 describe("CustomOrderPlanner form", () => {

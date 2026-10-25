@@ -72,7 +72,7 @@ export function ShopPage() {
               Handmade Collection
             </h1>
             <p className="text-sm sm:text-base text-plum-700">
-              Browse our sample handcrafted pieces. Tap any item to inquire or order on Instagram.
+              Browse our handcrafted pieces. Tap any item to inquire or order on Instagram.
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export function ShopPage() {
           {/* Results Summary & Clear filter button */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <div aria-live="polite" className="text-sm text-plum-700 font-medium">
-              Showing <span className="font-bold text-plum-950">{filteredItems.length}</span> sample {filteredItems.length === 1 ? "piece" : "pieces"}
+              Showing <span className="font-bold text-plum-950">{filteredItems.length}</span> {filteredItems.length === 1 ? "piece" : "pieces"}
               {categoryParam !== "all" && <span> in <span className="capitalize font-semibold text-rose-600">{categoryParam}</span></span>}
               {queryParam && <span> matching &quot;<span className="italic font-semibold">{queryParam}</span>&quot;</span>}
             </div>
@@ -123,7 +123,7 @@ export function ShopPage() {
           ) : (
             <EmptyState
               title="No pieces found"
-              message="No sample items match your active search or category. Message us for a custom piece or clear filters."
+              message="No items match your active search or category. Message us for a custom piece or clear filters."
               onReset={handleClearFilters}
               showCustomOrderCta={true}
             />

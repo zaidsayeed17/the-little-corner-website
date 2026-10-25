@@ -14,9 +14,10 @@ import { filterProducts } from "../lib/filters";
 export function HomePage() {
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // Show up to 8 featured sample products, filtered by category chip
+  // Show up to 8 featured products, filtered by category chip
   const displayedProducts = useMemo(() => {
-    return filterProducts(products, { category: activeCategory }).slice(0, 8);
+    const featuredProducts = products.filter((p) => p.featured);
+    return filterProducts(featuredProducts, { category: activeCategory }).slice(0, 8);
   }, [activeCategory]);
 
   return (

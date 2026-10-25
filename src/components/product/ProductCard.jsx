@@ -49,7 +49,8 @@ export function ProductCard({ product }) {
               ? "keychain"
               : "gift"
           }
-          showPlaceholderBadge={siteConfig.features.showPlaceholderBadges}
+          showPlaceholderBadge={Boolean(product.isPlaceholder && siteConfig.features.showPlaceholderBadges)}
+          objectPosition={product.image?.objectPosition || "center"}
           aspectRatio="aspect-4/5"
         />
 

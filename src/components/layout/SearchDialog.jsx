@@ -100,7 +100,7 @@ export function SearchDialog({ isOpen, onClose }) {
             quickMatches.length > 0 ? (
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-wider text-rose-700">
-                  Sample Matches
+                  Matches
                 </p>
                 <div className="divide-y divide-blush-100">
                   {quickMatches.map((product) => (
@@ -130,7 +130,7 @@ export function SearchDialog({ isOpen, onClose }) {
               </div>
             ) : (
               <p className="text-sm text-plum-700 text-center py-6">
-                No sample items match &quot;{searchTerm}&quot;. Press Enter to search the shop.
+                No items match &quot;{searchTerm}&quot;. Press Enter to search the shop.
               </p>
             )
           ) : (

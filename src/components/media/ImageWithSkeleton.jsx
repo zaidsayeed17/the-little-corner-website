@@ -15,6 +15,8 @@ export function ImageWithSkeleton({
   className = "",
   imgClassName = "",
   loading = "lazy",
+  objectPosition = "center",
+  style = {},
   ...props
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -52,6 +54,7 @@ export function ImageWithSkeleton({
         decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
+        style={{ objectPosition, ...style }}
         className={`w-full h-full object-cover transition-opacity duration-300 ${
           isLoaded ? "opacity-100" : "opacity-0"
         } ${imgClassName}`}

@@ -159,6 +159,7 @@ export function SavedDrawer({ isOpen, onClose }) {
                           : "gift"
                       }
                       showPlaceholderBadge={false}
+                      objectPosition={product.image?.objectPosition || "center"}
                       aspectRatio="aspect-4/5"
                     />
                   </div>

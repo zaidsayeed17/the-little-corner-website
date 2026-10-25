@@ -118,82 +118,65 @@ Before making the website live for real customers, review and replace remaining 
 | **Instagram DM & Profile** | `src/config/site.js` | Configured to `@thelittlecornerbytasbiii` | ✅ Configured |
 | **WhatsApp Number** | `src/config/site.js` (`whatsappNumber`) | International digits with country code (e.g. `"919876543210"`). Enables secondary WhatsApp inquiry buttons. | ⏳ Optional (currently empty) |
 | **Logo** | `src/components/layout/Logo.jsx` | Drop your transparent logo image in `/public/images/logo.png` and uncomment the `<img>` slot. | ⏳ To supply |
-| **Real Photos** | `/public/images/` & `src/data/products.js` | Replace `image.src: null` with `/images/your-product.jpg`. | ⏳ To supply |
-| **Names & Descriptions**| `src/data/products.js` | Replace sample names with official product titles and material/dimension descriptions. | ⏳ To supply |
-| **Product Prices** | `src/data/products.js` (`price`) | Replace `null` with actual numeric values (e.g. `499`). | ⏳ To supply |
-| **Availability** | `src/data/products.js` (`availability`)| Change from `"ask"` to `"available"`, `"limited"`, or `"sold-out"`. | ⏳ To supply |
+| **Real Product Photos** | `/public/images/products/` & `src/data/products.js` | 16 genuine handmade craft photos configured with custom focal positioning. | ✅ 16 Photos Live |
+| **Names & Descriptions**| `src/data/products.js` | 16 authentic products configured across Flowers, Keychains, and Gifts. | ✅ 16 Items Live |
+| **Product Prices** | `src/data/products.js` (`price`) | Replace `null` with actual numeric values (e.g. `199`). If `null`, shows *"Message for price"*. | ⏳ Ready to set |
+| **Availability** | `src/data/products.js` (`availability`)| Change from `"ask"` to `"available"`, `"limited"`, or `"sold-out"`. | ⏳ Configured as "ask" |
 | **Brand Copy & Story** | `src/config/content.js` | Review and personalize the draft brand story, checklist, and process steps. | ⏳ To review |
 | **FAQs** | `src/config/content.js` (`faqs`) | Fill in official answers for order turnaround, shipping locations, and payment details. | ⏳ To review |
 | **Policies** | `src/config/content.js` (`policies`) | Update Shipping & Delivery, Returns, and Privacy terms. | ⏳ To review |
 | **Canonical URL** | `src/config/site.js` (`siteUrl`) | Set your production domain (e.g. `https://thelittlecorner.com`) for SEO tags and sitemap. | ⏳ To supply |
 | **Open Graph Card** | `/public/og-placeholder.svg` | Replace with a high-resolution 1200x630px social share banner `/public/og-image.jpg`. | ⏳ To supply |
-| **Mobile Phone Test** | Real Device | Test tapping "Order on Instagram" on both iOS and Android to confirm the Instagram app/web DM opens and clipboard paste works smoothly. | ⏳ To test |
+| **Mobile Phone Test** | Real Device | Test tapping "I'm Interested" on both iOS and Android to confirm the Instagram app/web DM opens and clipboard paste works smoothly. | ⏳ To test |
 
 ---
 
-## 📸 How to Swap Placeholder Images
+## 📸 Product Photography & Originality Standard
 
-By default, all product and gallery items render a soft tone gradient with SVG iconography and a discreet `"Placeholder photo"` badge.
+> [!IMPORTANT]
+> **Every product photograph displayed on this website must be the shop's own original work.**
+> Do not use stock photography, external Pinterest reposts without ownership, or images of items not crafted by The Little Corner.
 
-To swap them for real product photos:
-1. Save your optimized photography into `public/images/`:
-   ```text
-   public/
-     images/
-       rose-bouquet.jpg
-       charm-keychain.jpg
-       curated-hamper.jpg
-   ```
-2. Open `src/data/products.js` (or `src/data/gallery.js`).
-3. Set the `src` property on the product's `image` object:
-   ```javascript
-   {
-     id: "prod-1",
-     slug: "handmade-flower-bouquet",
-     name: "Pastel Dream Flower Bouquet",
-     category: "flowers",
-     shortDescription: "Hand-knit pastel roses with baby breath sprigs.",
-     price: 850,
-     availability: "available",
-     badge: "Bestseller",
-     featured: true,
-     isPlaceholder: false, // Set to false to remove sample markers
-     image: {
-       src: "/images/rose-bouquet.jpg", // <--- point here
-       alt: "Pastel Dream everlasting flower bouquet",
-       placeholderTone: "rose",
-     },
-   }
-   ```
-4. The `ImageWithSkeleton` component will automatically display a gentle blush shimmer while the photograph loads, and fade it in seamlessly.
+All product photographs are stored in `/public/images/products/` and are presented in a clean `4:5` aspect ratio card with smooth skeleton loading and custom focal alignment.
 
 ---
 
-## 🛍️ How to Add a New Product
+## 🛍️ How to Add or Edit a Product
 
-Add a new item to the `products` array in `src/data/products.js`:
+Every item in the store catalog is defined in `src/data/products.js`.
+
+### Product Schema
 
 ```javascript
 {
-  id: "prod-9",
-  slug: "lavender-keepsake-charm",
-  name: "Lavender Flower Charm",
-  category: "keychains", // "flowers" | "keychains" | "other-gifts"
-  shortDescription: "Delicate crochet lavender flower with gold-tone lobster clasp.",
-  price: 299, // null displays "Message for price"
-  availability: "available", // "available" | "limited" | "sold-out" | "ask"
-  badge: "New", // string or null
-  featured: true, // true to show in Homepage picks
-  isPlaceholder: false,
+  id: "pink-tulip-bouquet",
+  slug: "pink-tulip-bouquet",
+  name: "Pink Tulip Bouquet",
+  category: "flowers", // "flowers" | "keychains" | "other-gifts"
+  shortDescription: "Handmade by The Little Corner. Message us for details.",
+  price: null, // number (e.g. 199) or null for "Message for price"
+  availability: "ask", // "available" | "limited" | "sold-out" | "ask"
+  badge: null, // optional string badge like "Bestseller" or "New", or null
+  featured: true, // true to display in the Homepage featured grid (up to 8 items)
+  isPlaceholder: false, // set false for real products (hides "Sample" / placeholder markers)
   image: {
-    src: "/images/lavender-charm.jpg",
-    alt: "Handmade lavender flower charm keychain",
+    src: "/images/products/pink-tulip-bouquet.jpg",
+    alt: "A single fuzzy pink tulip with green leaves, wrapped in blush paper",
     placeholderTone: "blush", // "blush" | "rose" | "cream" | "leaf"
+    objectPosition: "center 30%", // CSS object-position for custom vertical/horizontal focal crop
   },
 }
 ```
 
-The new product will automatically appear in:
+### Adding Prices
+- Set `price: 199` (a standard number without quotes or currency signs).
+- The currency symbol and locale formatting are automatically applied based on `siteConfig.currency` (configured in `src/config/site.js`, e.g. `₹` INR).
+- Leaving `price: null` gracefully renders the `"Message for price"` badge and copy, prompting customers to inquire via DM.
+
+### Image Focal Positioning
+- Since cards maintain a consistent `4:5` aspect ratio across all screen sizes, use `image.objectPosition` (e.g. `"center 30%"` or `"center top"`) to ensure the key subject of tall or wide photos remains perfectly centered.
+
+The product will automatically appear in:
 - The Home page featured grid (if `featured: true`)
 - The `/shop` collection catalog with real-time category filtering and search
 - The quick search dialog accessible from the top navigation bar

@@ -19,6 +19,14 @@ import {
 import { formatPrice } from "../lib/format";
 import { filterProducts } from "../lib/filters";
 import { siteConfig } from "../config/site";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { products } from "../data/products";
+import { categories } from "../data/categories";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const publicDir = path.resolve(__dirname, "../../public");
 
 describe("site configuration", () => {
   it("configures Instagram profile and DM URLs correctly", () => {
@@ -299,5 +307,53 @@ describe("filterProducts utility", () => {
   it("returns empty array when no matches found", () => {
     const none = filterProducts(sampleProducts, { query: "nonexistent item" });
     expect(none).toEqual([]);
+  });
+});
+
+describe("catalogue data integrity and categorization", () => {
+  it("every product has a unique id and unique slug", () => {
+    expect(products.length).toBe(16);
+
+    const ids = products.map((p) => p.id);
+    const uniqueIds = new Set(ids);
+    expect(uniqueIds.size).toBe(products.length);
+
+    const slugs = products.map((p) => p.slug);
+    const uniqueSlugs = new Set(slugs);
+    expect(uniqueSlugs.size).toBe(products.length);
+  });
+
+  it("every product has non-empty name, non-empty alt text, and valid category", () => {
+    const validCategoryIds = categories.map((c) => c.id);
+
+    products.forEach((product) => {
+      expect(typeof product.name).toBe("string");
+      expect(product.name.trim().length).toBeGreaterThan(0);
+
+      expect(typeof product.image?.alt).toBe("string");
+      expect(product.image.alt.trim().length).toBeGreaterThan(0);
+
+      expect(validCategoryIds).toContain(product.category);
+    });
+  });
+
+  it("every product image.src points to a physically existing file under public/", () => {
+    products.forEach((product) => {
+      expect(product.image?.src).toBeTruthy();
+      const relativePath = product.image.src.replace(/^\//, "");
+      const fullPath = path.join(publicDir, relativePath);
+      expect(fs.existsSync(fullPath)).toBe(true);
+    });
+  });
+
+  it("category filter counts match catalogue breakdown (flowers: 4, keychains: 11, other-gifts: 1)", () => {
+    const flowers = filterProducts(products, { category: "flowers" });
+    const keychains = filterProducts(products, { category: "keychains" });
+    const otherGifts = filterProducts(products, { category: "other-gifts" });
+
+    expect(flowers).toHaveLength(4);
+    expect(keychains).toHaveLength(11);
+    expect(otherGifts).toHaveLength(1);
+    expect(flowers.length + keychains.length + otherGifts.length).toBe(16);
   });
 });
