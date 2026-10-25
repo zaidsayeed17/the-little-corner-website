@@ -107,7 +107,7 @@ export function SavedDrawer({ isOpen, onClose }) {
         </div>
 
         {/* Content list */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-6 space-y-4" data-lenis-prevent>
           {savedProducts.length === 0 ? (
             <div className="py-12 text-center space-y-3">
               <div className="w-12 h-12 rounded-full bg-blush-100 mx-auto flex items-center justify-center text-rose-500">

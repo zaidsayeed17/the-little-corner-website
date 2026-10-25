@@ -4,6 +4,7 @@ import { AnnouncementBar } from "./components/layout/AnnouncementBar";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 import { ScrollToTopAndAnchor } from "./components/layout/ScrollToTopAndAnchor";
+import { SmoothScroll } from "./components/layout/SmoothScroll";
 import { DevNotice } from "./components/ui/DevNotice";
 import { HomePage } from "./pages/HomePage";
 import { ShopPage } from "./pages/ShopPage";
@@ -13,7 +14,8 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen flex flex-col overflow-x-hidden">
+    <SmoothScroll>
+      <div className="relative min-h-screen flex flex-col overflow-x-hidden">
       {/* Background radial glows fixed behind content */}
       <div className="bg-glow-decor" aria-hidden="true" />
 
@@ -51,5 +53,6 @@ export default function App() {
       {/* Dev-only notice pinned bottom-left (auto-hidden in production) */}
       <DevNotice />
     </div>
+  </SmoothScroll>
   );
 }

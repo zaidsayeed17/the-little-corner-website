@@ -26,6 +26,7 @@ The design is inspired by the visual scrapbook charm and soft aesthetic of the G
 - **Icons**: [Lucide React](https://lucide.dev) + custom accessible SVG brand icons & doodles
 - **Routing**: [React Router DOM v6](https://reactrouter.com)
 - **SEO & Social Cards**: [react-helmet-async](https://github.com/staylor/react-helmet-async) with OpenGraph and JSON-LD schema
+- **Smooth Scrolling**: [Lenis](https://lenis.darkroom.engineering) with prefers-reduced-motion accessibility support
 - **Testing**: [Vitest](https://vitest.dev) + [React Testing Library](https://testing-library.com) + `@testing-library/jest-dom`
 - **Typography** (Google Fonts):
   - *Serif*: **Playfair Display** (Headings, titles, price accents)
@@ -125,7 +126,7 @@ Before making the website live for real customers, review and replace remaining 
 | **Brand Copy & Story** | `src/config/content.js` | Review and personalize the draft brand story, checklist, and process steps. | ⏳ To review |
 | **FAQs** | `src/config/content.js` (`faqs`) | Fill in official answers for order turnaround, shipping locations, and payment details. | ⏳ To review |
 | **Policies** | `src/config/content.js` (`policies`) | Update Shipping & Delivery, Returns, and Privacy terms. | ⏳ To review |
-| **Canonical URL** | `src/config/site.js` (`siteUrl`) | Set your production domain (e.g. `https://thelittlecorner.com`) for SEO tags and sitemap. | ⏳ To supply |
+| **Canonical URL** | `src/config/site.js` (`siteUrl`) | Production domain deployed on Vercel for SEO tags, canonical link, and sitemap. | ✅ Configured (`https://the-littlecorner.vercel.app`) |
 | **Open Graph Card** | `/public/og-placeholder.svg` | Replace with a high-resolution 1200x630px social share banner `/public/og-image.jpg`. | ⏳ To supply |
 | **Mobile Phone Test** | Real Device | Test tapping "I'm Interested" on both iOS and Android to confirm the Instagram app/web DM opens and clipboard paste works smoothly. | ⏳ To test |
 

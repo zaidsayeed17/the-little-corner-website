@@ -25,3 +25,26 @@ Object.defineProperty(window, 'localStorage', {
 // Polyfill window.scrollTo and Element.prototype.scrollIntoView
 window.scrollTo = () => {};
 Element.prototype.scrollIntoView = () => {};
+
+// Polyfill window.matchMedia for jsdom
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: (query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+});
+
+// Polyfill ResizeObserver for jsdom
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+

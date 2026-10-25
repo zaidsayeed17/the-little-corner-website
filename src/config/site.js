@@ -12,7 +12,7 @@ const rawConfig = {
   whatsappNumber: "", // TODO: digits only with country code; leave empty until the owner supplies it
   email: "", // optional TODO: e.g. hello@thelittlecorner.com
   address: "", // optional TODO: studio or city location
-  siteUrl: "", // TODO: e.g. https://thelittlecorner.com for canonical & OG tags
+  siteUrl: "https://the-littlecorner.vercel.app",
   currency: {
     code: "INR",
     locale: "en-IN",

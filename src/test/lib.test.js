@@ -45,6 +45,10 @@ describe("site configuration", () => {
     expect(siteConfig.whatsappNumber).toBe("");
     expect(isWhatsAppConfigured(siteConfig.whatsappNumber)).toBe(false);
   });
+
+  it("configures the live deployment siteUrl correctly", () => {
+    expect(siteConfig.siteUrl).toBe("https://the-littlecorner.vercel.app");
+  });
 });
 
 describe("instagram utilities", () => {

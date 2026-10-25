@@ -9,6 +9,7 @@ import { SavedDrawer } from "../components/layout/SavedDrawer";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { HomePage } from "../pages/HomePage";
+import { SmoothScroll } from "../components/layout/SmoothScroll";
 import { siteConfig } from "../config/site";
 
 const mockSampleProduct = {
@@ -393,5 +394,18 @@ describe("Home Page smoke test", () => {
 
     // Custom order section title
     expect(screen.getByText(/Custom Order Planner/i)).toBeInTheDocument();
+  });
+});
+
+describe("SmoothScroll component", () => {
+  it("renders children cleanly", () => {
+    render(
+      <SmoothScroll>
+        <div data-testid="scroll-content">Smooth Scroll Content</div>
+      </SmoothScroll>
+    );
+
+    expect(screen.getByTestId("scroll-content")).toBeInTheDocument();
+    expect(screen.getByText("Smooth Scroll Content")).toBeInTheDocument();
   });
 });

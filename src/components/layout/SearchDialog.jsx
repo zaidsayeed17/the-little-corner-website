@@ -95,7 +95,7 @@ export function SearchDialog({ isOpen, onClose }) {
         </form>
 
         {/* Live suggestions or quick links */}
-        <div className="p-4 max-h-[60vh] overflow-y-auto">
+        <div className="p-4 max-h-[60vh] overflow-y-auto" data-lenis-prevent>
           {searchTerm.trim() ? (
             quickMatches.length > 0 ? (
               <div className="space-y-2">

@@ -45,6 +45,10 @@
     background-color: var(--color-ivory);
   }
 
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   body {
     position: relative;
     overflow-x: hidden;
